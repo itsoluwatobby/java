@@ -3,16 +3,15 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class MortgageCalculator {
-    final byte MONTHS_IN_YEAR = 12;
-    final byte PERCENT = 100;
-    final int MIN_PRINCIPAL = 1_000;
-    final int MAX_PRINCIPAL = 1_000_000;
+    private final byte MONTHS_IN_YEAR = 12;
 
-    int principal = 0;
-    float annualInterest = 0;
-    double monthlyInterest = 0;
-    int period = 0;
-    int numberOfPayments = 0;
+    private int principal = 0;
+    private double monthlyInterest = 0;
+    private int numberOfPayments = 0;
+
+    static {
+        System.out.println("Class loaded");
+    }
 
 
     public void annualCalculator() {
@@ -36,6 +35,8 @@ public class MortgageCalculator {
         while (true) {
             System.out.print("Principal ($1k - $1M): ");
             principal = sc.nextInt();
+            int MAX_PRINCIPAL = 1_000_000;
+            int MIN_PRINCIPAL = 1_000;
             if (principal > MIN_PRINCIPAL && principal < MAX_PRINCIPAL) break;
             String minFormat = this.formatPrice(MIN_PRINCIPAL);
             String maxFormat = this.formatPrice(MAX_PRINCIPAL);
@@ -46,7 +47,8 @@ public class MortgageCalculator {
     private void annualInterestValidator(Scanner sc) {
         while (true) {
             System.out.print("Annual Interest Rate: ");
-            annualInterest = sc.nextFloat();
+            int PERCENT = 100;
+            float annualInterest = sc.nextFloat();
             if (annualInterest > 1 && annualInterest < 30) {
                 monthlyInterest = (annualInterest / PERCENT) / MONTHS_IN_YEAR;
                 break;
@@ -58,7 +60,7 @@ public class MortgageCalculator {
     private void periodValidator(Scanner sc) {
         while (true) {
             System.out.print("Period (Years): ");
-            period = sc.nextInt();
+            int period = sc.nextInt();
             if (period > 1 && period < 30) {
                 numberOfPayments = period * MONTHS_IN_YEAR;
                 break;
