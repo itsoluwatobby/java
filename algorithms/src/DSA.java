@@ -37,7 +37,7 @@ class SearchAlgorithms {
 
 class SortingAlgorithms {
 
-    public void bubbleSort(int[] array) {
+    public void bubbleSort(int[] array, Boolean reversed) {
         if (array == null || array.length == 0) return;
         int n = array.length;
         boolean isSwapped;
@@ -45,7 +45,11 @@ class SortingAlgorithms {
         for (int i = 0; i < n; i++) { // 0(n**2)
             isSwapped = false;
             for (int j = 0; j < n - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
+                if (
+                        reversed
+                                ? array[j] < array[j + 1]
+                                : array[j] > array[j + 1]
+                ) {
                     int temp = array[j + 1];
                     array[j + 1] = array[j];
                     array[j] = temp;
@@ -63,7 +67,7 @@ public class DSA {
         int[] unsortedArray = { 13, 1, 4, 32, 5, 22, 40, 7, 45, 9 };
         SortingAlgorithms sortingAlgorithms = new SortingAlgorithms();
 //        bubble sort
-        sortingAlgorithms.bubbleSort(unsortedArray);
+        sortingAlgorithms.bubbleSort(unsortedArray, false);
         System.out.println(Arrays.toString(unsortedArray));
     }
 //    public static void main(String[] args) {
